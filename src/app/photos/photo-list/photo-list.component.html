@@ -1,0 +1,9 @@
+<ap-search (onTyping)="filter = $event" [value]="filter"
+> <!--através do evento onTyping, o valor do input search é passado para filter-->   
+</ap-search>
+
+<ap-photos [photos]="photos | filterByDescription: filter"></ap-photos>
+<!--| = pipe filterByDescription recebe por data binding 2 atributos: filter (input digitado pelo usuário com atraso do debounce) e photos (lista de fotos)-->
+
+<ap-load-button (click)="load()" [hasMore]="hasMore"></ap-load-button>
+<!--           chama o método    passa o false por data binding para esconder o botão-->

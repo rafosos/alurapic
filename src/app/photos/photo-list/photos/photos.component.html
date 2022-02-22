@@ -1,0 +1,25 @@
+<p class="text-center text-muted" *ngIf="!photos.length"> <!--se photos.length for igual a 0, if sem ! retorna false e nada acontece-->
+  Sorry, no photos
+</p>
+
+<ol class="list-unstyled">
+  <li *ngFor="let cols of rows" class="row no-gutters">
+    <div *ngFor="let photo of cols" class="col-4" apDarkenOnHover>
+    <a [routerLink]="['p', photo.id]">
+      <ap-card>
+          <ap-photo [url]='photo.url' 
+            [description]="photo.description"> <!--acessa as propriedades de cada foto por data binding-->
+          </ap-photo>
+          <div class="text-center p-1">
+            <i aria-hidden="true" class="fa fa-heart-o fa-1x mr-2"></i>{{ photo.likes }}
+            <span *ngIf="photo.allowComments"> <!--só exibe a quantidad de comentários se a foto permite comentários-->
+              <i aria-hidden="true" class="fa fa-comment-o fa-1x mr-2 ml-2"></i>{{ photo.comments }} 
+            </span>
+              
+          </div>
+        </ap-card>
+      </a>
+    </div>
+  </li>
+</ol>
+

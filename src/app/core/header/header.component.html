@@ -1,0 +1,34 @@
+<header>
+    <nav class="navbar navbar-light bg-white">
+        <a class="navbar-brand">
+            <i tabindex="0" (keyup.space)="menu.toggle()" (click)="menu.toggle()" class="fa fa-bars mr-2"></i>
+            <a [routerLink]="['']" class="navbar-brand">ALURAPIC</a>
+        </a>
+
+        <ap-menu #menu>
+            <ul class="list-unstyled ml-2 mt-4">
+                <li apShowIfNotLogged [routerLink]="['']">Login</li>
+                <li apShowIfNotLogged [routerLink]="['home/signup']">Register</li>
+                <li apShowIfLogged [routerLink]="['']">Home</li>
+                <li apShowIfLogged [routerLink]="['p', 'add']">Upload</li>
+            </ul>
+        </ap-menu>
+        <!--se o usuário existir (está logado), é exibido o icone + nome do usuário-->
+        <div *ngIf="(user$ | async) as user; else login">
+        <i class="fa fa-user-circle"></i>
+        <a class="mr-4 ml-2">{{ user.name }}</a>
+        <a (click)="logout()" >(logout)</a>
+        </div>
+
+        <!--se o usuário não estiver logado, é exibido a mensagem please login-->
+        <ng-template #login>
+            <span class="navbar-text">
+                <a [routerLink]="['']">Please, login!</a>
+            </span>
+        </ng-template>
+        <div class="fixed-top">
+            <ap-loading></ap-loading>
+            <ap-alert></ap-alert>
+        </div>
+    </nav>
+</header>
